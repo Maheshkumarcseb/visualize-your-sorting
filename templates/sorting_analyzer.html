@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Sorting Analyzer</h2>
+
+<!-- Flash messages for login or errors -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<!-- Controls for interactive sorting -->
+<div class="controls">
+    <label>Algorithm:</label>
+    <select id="algorithm">
+        <option value="bubble">Bubble Sort</option>
+        <option value="selection">Selection Sort</option>
+        <option value="insertion">Insertion Sort</option>
+        <option value="merge">Merge Sort</option>
+        <option value="quick">Quick Sort</option>
+        <option value="heap">Heap Sort</option>
+    </select>
+
+    <label>Size:</label>
+    <input type="number" id="size" value="20" min="5" max="100">
+
+    <label>Speed (s):</label>
+    <input type="number" id="speed" value="0.1" step="0.01" min="0.01" max="1">
+
+    <button id="generate">Generate</button>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</div>
+
+<div id="array-container"></div>
+
+<script>
+    let array = [];
+    let sorting = false;
+
+    async function generateArray() {
+        const size = document.getElementById('size').value;
+        const res = await fetch(`/generate_array/${size}`);
+        array = await res.json();
+        drawArray(array);
+    }
+
+    function drawArray(arr, highlight=[]) {
+        const container = document.getElementById('array-container');
+        container.innerHTML = '';
+        const width = container.clientWidth / arr.length - 2;
+
+        arr.forEach((val, idx)=>{
+            const barContainer = document.createElement('div');
+            barContainer.style.position='relative';
+            barContainer.style.width=width+'px';
+            barContainer.style.margin='0 1px';
+
+            const bar = document.createElement('div');
+            bar.classList.add('array-bar');
+            bar.style.height=val*3+'px';
+            bar.style.width='100%';
+            if(highlight.includes(idx)) bar.style.backgroundColor='red';
+
+            const number = document.createElement('div');
+            number.innerText = val;
+            number.classList.add('bar-number');
+            number.style.position='absolute';
+            number.style.top='-20px';
+            number.style.width='100%';
+            number.style.textAlign='center';
+
+            barContainer.appendChild(number);
+            barContainer.appendChild(bar);
+            container.appendChild(barContainer);
+        });
+    }
+
+    async function startSorting() {
+        if(sorting) return;
+        sorting=true;
+        const algorithm=document.getElementById('algorithm').value;
+        const speed=parseFloat(document.getElementById('speed').value)*1000;
+
+        const res=await fetch('/start_sort',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({array: array, algorithm: algorithm})
+        });
+        const steps=await res.json();
+
+        for(let i=0;i<steps.length;i++){
+            if(!sorting) break;
+            drawArray(steps[i].array, steps[i].indices);
+            await new Promise(r=>setTimeout(r,speed));
+        }
+        sorting=false;
+    }
+
+    function stopSorting(){
+        sorting=false;
+    }
+
+    document.getElementById('generate').addEventListener('click', generateArray);
+    document.getElementById('start').addEventListener('click', startSorting);
+    document.getElementById('stop').addEventListener('click', stopSorting);
+
+    generateArray();
+</script>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>welcome to Analyzer</h2>
+<div class="login-wrapper">
+    <div class="form-container">
+        <h2>Login</h2>
+        {% if msg %}
+        <p class="error-msg">{{ msg }}</p>
+        {% endif %}
+        <form method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p class="signup-link">Don't have an account? <a href="{{ url_for('signup') }}">Signup</a></p>
+    </div>
+
+    <div class="project-insight">
+        <h3>About Our Project</h3>
+        <p>Welcome to <strong>Flask Sorting Analyzer</strong>! Explore different sorting algorithms like Bubble, Quick, Merge, and Heap Sort with interactive visualizations. 
+        Learn how algorithms work step by step and improve your programming skills.</p>
+    </div>
+</div>
+
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 900px;
+}
+
+.form-container {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-container input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+}
+
+.form-container input:focus {
+    border-color: #ff6600;
+}
+
+.form-container button {
+    width: 95%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff6600;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #e65c00;
+}
+
+.error-msg {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.signup-link {
+    margin-top: 10px;
+}
+
+.signup-link a {
+    color: #ff6600;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.project-insight {
+    margin-top: 30px;
+    text-align: center;
+    max-width: 700px;
+    color: #444;
+}
+
+.project-insight h3 {
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.project-insight p {
+    line-height: 1.6;
+}
+</style>
+{% endblock %}

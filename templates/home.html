@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="home-hero">
+    <div class="hero-text">
+        <h1>Welcome, {{ session.username if session.username else 'Guest' }}!</h1>
+        {% if session.username %}
+            <p>Ready to explore the <strong>Sorting Analyzer</strong> and improve your algorithm skills?</p>
+            <a href="{{ url_for('sorting_analyzer') }}" class="btn-primary">Go to Sorting Analyzer</a>
+            <a href="{{ url_for('logout') }}" class="btn-secondary">Logout</a>
+        {% else %}
+            <p>Sign up or login to start exploring interactive sorting algorithms!</p>
+            <a href="{{ url_for('login') }}" class="btn-primary">Login</a>
+            <a href="{{ url_for('signup') }}" class="btn-secondary">Signup</a>
+        {% endif %}
+    </div>
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='sorting_visualizer.png') }}" alt="Sorting Visualizer" height:200 px/>
+    </div>
+</div>
+
+<style>
+.home-hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f0f4ff, #d9e2ec);
+    padding: 60px 20px;
+    border-radius: 12px;
+    margin: 30px auto;
+    max-width: 1200px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+    padding: 20px;
+}
+
+.hero-text h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.hero-text a {
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-right: 15px;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #e65c00;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #ff6600;
+    border: 2px solid #ff6600;
+}
+
+.btn-secondary:hover {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+.hero-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+</style>
+
+{% endblock %}

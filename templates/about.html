@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="about-container">
+    <h1>About Our Sorting Visualizer Project</h1>
+
+    <p>Welcome to <strong>Flask Sorting Analyzer</strong>! This project is designed to help students, developers, and enthusiasts
+       understand how different sorting algorithms work in a visual and interactive way.</p>
+
+    <div class="features">
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>Multiple Sorting Algorithms:</strong> Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort, Heap Sort.</li>
+            <li><strong>Interactive Visualizations:</strong> See how each algorithm sorts numbers step by step.</li>
+            <li><strong>Customizable Input:</strong> Enter your own numbers or generate random arrays of desired size.</li>
+            <li><strong>Adjustable Speed:</strong> Control the speed of sorting to analyze every step in detail.</li>
+            <li><strong>Login & User Management:</strong> Only registered users can access advanced features like Sorting Analyzer.</li>
+            <li><strong>Responsive Design:</strong> Works seamlessly on both desktop and mobile devices.</li>
+        </ul>
+    </div>
+
+    <div class="insight">
+        <h2>Why This Project?</h2>
+        <p>Sorting algorithms are fundamental in computer science. Understanding them deeply is crucial for coding interviews,
+            algorithm design, and optimization. This visualizer helps users:
+        </p>
+        <ul>
+            <li>Learn algorithm behavior step by step.</li>
+            <li>Compare efficiency of different sorting techniques.</li>
+            <li>Gain practical understanding of time and space complexity.</li>
+        </ul>
+    </div>
+
+    <div class="conclusion">
+        <p>We hope this project serves as an educational tool for anyone who wants to strengthen their programming and algorithm skills.
+        Start exploring the <strong>Sorting Analyzer</strong> and see algorithms in action!</p>
+    </div>
+</div>
+
+<style>
+.about-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.about-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.about-container h2 {
+    color: #444;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff6600;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.about-container p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.about-container ul {
+    list-style-type: square;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.about-container ul li {
+    margin-bottom: 10px;
+}
+
+.conclusion {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+}
+</style>
+
+{% endblock %}
