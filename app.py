@@ -4,13 +4,13 @@ import copy
 import random
 
 app = Flask(__name__)
-app.secret_key = "12345"
+app.secret_key = "xxxxxx"
 
 def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="12345",  
+        password="xxxxx",  
         database="flask_users"
     )
 
